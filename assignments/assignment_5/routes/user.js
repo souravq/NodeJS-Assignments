@@ -6,7 +6,7 @@ const bodyparser = require("body-parser");
 const { body, param, validationResult } = require('express-validator');
 
 router.use(bodyparser());
-// Get route to fetch the data
+
 router.get("/", async (req, res) => {
     const users = await User.find();
     res.json({
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     });
     
 })
-// POST route-- create data
+
 router.post("/",  body('email').isEmail(), body('name').isAlpha(), async (req, res) => {
     try{
         const errors = validationResult(req);
@@ -41,13 +41,13 @@ router.get("*", async (req, res) => {
         message: "API NOT FOUND"
     });
 })
-// PUT route-- update data
+
 router.put("/:id", param("id").isMongoId(), async (req, res) => {
     try{
         await User.updateOne({_id: req.params.id}, req.body);
         return res.json({
              status: "Success",
-            // data : user
+           
         });
     }catch(e){
         console.log(e);
@@ -58,13 +58,13 @@ router.put("/:id", param("id").isMongoId(), async (req, res) => {
     }
 });
 
-// PATCH route-- update data
+
 router.patch("/:id", async (req, res) => {
     try{
         await User.updateOne({_id: req.params.id}, req.body);
         return res.json({
              status: "Success",
-            // data : user
+           
         });
     }catch(e){
         console.log(e);
@@ -75,13 +75,13 @@ router.patch("/:id", async (req, res) => {
     }
 });
 
-// DELETE route-- update data
+
 router.delete("/:id" , body("id").isMongoId(), async (req, res) => {
     try{
         await User.deleteOne({_id: req.params.id});
         return res.json({
              status: "Success",
-            // data : user
+           
         });
     }catch(e){
         console.log(e);
