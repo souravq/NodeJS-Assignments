@@ -17,7 +17,7 @@ app.use("/api/v1/posts", (req, res, next) =>{
             message: "Token is missing"
         })
     }
-    // verify the token
+    // verify
     jwt.verify(token, SECRET, async function(err, decoded) {
         if(err){
             return res.status(401).json({
