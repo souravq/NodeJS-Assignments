@@ -59,7 +59,7 @@ router.post("/login", body("email"), body("password"), async (req, res) => {
                 message:"Invalid user"
             })
         }
-        // Load hash from your password DB.
+        
         bcrypt.compare(password, user.password).then(function(result) {
             if(result){
                 var token = jwt.sign({
